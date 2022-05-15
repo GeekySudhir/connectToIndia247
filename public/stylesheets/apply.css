@@ -12,7 +12,7 @@ textarea {
     font-family: "Poppins", sans-serif;
 }
 
-.container {
+.container-apply {
     position: relative;
     width: 100%;
     min-height: 100vh;
@@ -22,6 +22,7 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .form {
