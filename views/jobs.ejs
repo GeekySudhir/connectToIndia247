@@ -39,7 +39,11 @@
                     <% for(var i=0; i < data.length; i++) { %>
                     <tr>
                         <td><%= i+1 %></td>
-                        <td><%= data[i].position %></td>
+                        <td>
+                            <a href=<%= "/job/detail/"+data[i]._id  %>>
+                                <%= data[i].position %>
+                            </a>
+                        </td>
                         <td><%= data[i].code %></td>
                         <td><%= data[i].company %></td>
                         <td><%= data[i].location %></td>

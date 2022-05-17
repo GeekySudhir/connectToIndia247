@@ -35,14 +35,28 @@ router.get("/add/job", function (req, res, next) {
   res.render("admin/addJobs", { title: "connect2India247" });
 });
 
-// for seeing the existing job
+// for seeing the existing all the jobs
 router.get("/list/job", async function (req, res, next) {
-  var data = await Jobs.find().limit(10);
-  console.log("from data:", data);
+  var data = await Jobs.find();
   res.render("admin/listJobs", { title: "connect2India247", data: data });
 });
 
 //for deleting a specific job
 
 // route for seeing a specific job
+router.get("/job/detail/:uid", async function (req, res, next) {
+  console.log("Request Id", req.params.uid);
+  var data = await Jobs.findById({ _id: req.params.uid }, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(200).send(err);
+    } else {
+      console.log(docs);
+      return res.render("job", { title: "connect2India247", data: docs });
+    }
+  });
+  console.log("from data:", data);
+  // res.render("job", { title: "connect2India247", data: data });
+});
+
 module.exports = router;
