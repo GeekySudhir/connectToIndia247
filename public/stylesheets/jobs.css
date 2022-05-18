@@ -65,3 +65,36 @@
     padding: 20px 20ox;
     margin-top: 40px;
 }
+
+
+
+.display-log {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.failed-status {
+    width: 200px;
+    text-align: center;
+    background: tomato;
+    color: white;
+    display: flex;
+    padding: 0px 10px;
+
+}
+
+.success-status {
+    width: 200px;
+    padding: 0px 10px;
+    text-align: center;
+    background: rgb(18, 80, 18);
+    color: white;
+    display: flex;
+}
+
+.status-text {
+    margin-top: 4px;
+    margin-left: 4px;
+}

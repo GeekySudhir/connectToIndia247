@@ -16,32 +16,66 @@ router.get("/apply", function (req, res, next) {
 router.get("/jobs", async function (req, res, next) {
   var data = await Jobs.find().limit(10);
   console.log("from data:", data);
-  res.render("jobs", { title: "connect2India247", data: data });
+  res.render("jobs", {
+    title: "connect2India247",
+    data: data.reverse(),
+    status: undefined,
+  });
 });
 
 // route for adding a specific job
 router.post("/add/job", async function (req, res, next) {
   console.log(req.body, "inserting a document");
   var job = new Jobs({ ...req.body });
-  job.save((err, result) => {
-    if (err) console.log(err);
-    else console.log(result);
+  await job.save((err, result) => {
+    if (err) {
+      res.render("admin/addJobs", {
+        title: "Unable added the job ",
+        status: false,
+      });
+    } else {
+      res.render("admin/addJobs", {
+        title: "Succesfully added the job ",
+        status: true,
+      });
+    }
   });
 
-  res.render("jobs", { title: "connect2India247" });
+  // res.render("admin/addJobs", { title: "" });
 });
 // route for adding a specific job
 router.get("/add/job", function (req, res, next) {
-  res.render("admin/addJobs", { title: "connect2India247" });
+  res.render("admin/addJobs", { title: "", status: undefined });
 });
 
 // for seeing the existing all the jobs
 router.get("/list/job", async function (req, res, next) {
   var data = await Jobs.find();
-  res.render("admin/listJobs", { title: "connect2India247", data: data });
+  res.render("admin/listJobs", {
+    title: "connect2India247",
+    data: data.reverse(),
+    status: undefined,
+  });
 });
 
 //for deleting a specific job
+router.get("/job/delete/:uid", async function (req, res, next) {
+  console.log("Request Id", req.params.uid);
+  await Jobs.findByIdAndDelete({ _id: req.params.uid }, async (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(200).send("some error happend while trying this");
+    } else {
+      var data = await Jobs.find().limit(10);
+      console.log("from data:", data);
+      res.render("admin/listJobs", {
+        title: "connect2India247",
+        status: true,
+        data: data.reverse(),
+      });
+    }
+  });
+});
 
 // route for seeing a specific job
 router.get("/job/detail/:uid", async function (req, res, next) {
