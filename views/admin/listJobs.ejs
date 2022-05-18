@@ -15,35 +15,38 @@
             </div>
         </div>
     </div>
-    <div class="main">
-        <div class="info-container">
-            <div class="display-log">
-                <% if (status==false) { %>
-                <div class="failed-status">
-                    <div>
+    <div class="info-container">
+        <div class="display-log">
+            <% if (status==false) { %>
+            <div class="failed-status">
+                <div>
 
-                        <i class="small material-icons">error</i>
-                    </div>
-                    <div class="status-text">
+                    <i class="small material-icons">error</i>
+                </div>
+                <div class="status-text">
 
-                        Failed to delete the job.
-                    </div>
+                    Failed to delete the job.
                 </div>
-                <% } %>
-                <% if (status==true) { %>
-                <div class="success-status">
-                    <div>
-                        <i class="small material-icons">delete</i>
-                    </div>
-                    <div class="status-text">
-                        Job was deleted!
-                    </div>
-                </div>
-                <% } %>
             </div>
+            <% } %>
+            <% if (status==true) { %>
+            <div class="success-status">
+                <div>
+                    <i class="small material-icons">delete</i>
+                </div>
+                <div class="status-text">
+                    Job was deleted!
+                </div>
+            </div>
+            <% } %>
         </div>
+    </div>
+    <div class="main">
+        
         <div class="table-container">
-            <table class="striped">
+                <input class="search" type="text" align="center" placeholder="search for jobs">
+
+                <table class="striped" id="myTable">
                 <thead>
                     <tr>
                         <th>S.No</th>
@@ -99,7 +102,13 @@
             $(this).addClass("hide");
             $(this).siblings().removeClass("hide");
 
-        })
+        });
+        $(".search").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
     })
 </script>
 

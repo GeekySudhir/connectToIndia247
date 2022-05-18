@@ -66,7 +66,7 @@ router.get("/job/delete/:uid", async function (req, res, next) {
       console.log(err);
       return res.status(200).send("some error happend while trying this");
     } else {
-      var data = await Jobs.find().limit(10);
+      var data = await Jobs.find();
       console.log("from data:", data);
       res.render("admin/listJobs", {
         title: "connect2India247",
